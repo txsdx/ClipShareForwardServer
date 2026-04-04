@@ -1,6 +1,10 @@
+<p align="center">
+  <span>简体中文</span> |
+  <a href="./README_EN.md">English</a>
+</p>
+
 该项目是 [ClipShare](https://github.com/aa2013/ClipShare) 的中转程序。
 
-English README: [README_EN.md](./README_EN.md)
 ## docker-compose
 更多细节查看 [中转程序使用说明](https://clipshare.coclyun.top/usages/forward.html)
 ```yaml

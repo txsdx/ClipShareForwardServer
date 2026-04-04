@@ -8,10 +8,8 @@
         color="primary"
         :title="t('language.label')"
       >
-        <template v-if="!compact">
-          <v-icon start icon="mdi-translate" />
-          {{ currentLocaleLabel }}
-        </template>
+        <v-icon start icon="mdi-translate" />
+        <span v-if="!compact">{{ currentLocaleLabel }}</span>
       </v-btn>
     </template>
 

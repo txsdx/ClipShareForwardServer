@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="./README.md">简体中文</a> |
+  <span>English</span>
+</p>
+
 # ClipShareForwardServer
 
 This project is the relay server for [ClipShare](https://github.com/aa2013/ClipShare).

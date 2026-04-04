@@ -18,7 +18,7 @@ import (
 )
 
 const authKey = "Authorization"
-const version = "1.1.1"
+const version = "1.1.2"
 //go:embed all:dist/*
 var embeddedFiles embed.FS
 var lastOperationTime *time.Time = nil

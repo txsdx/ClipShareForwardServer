@@ -5,7 +5,7 @@ import { ReqResponse } from '@/types'
 import { local } from '@/utils/user'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-const devServer = 'http://localhost:8282/'
+const devServer = 'http://localhost:8282/api/'
 const prodServer = '/api/'
 
 const { showGlobalDialog } = useGlobalDialog()
