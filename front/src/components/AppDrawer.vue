@@ -49,7 +49,10 @@
           <div class="flex justify-between ">
             <div class="flex align-center">
               <v-avatar color="primary">{{ local.username.substring(0, 1) }}</v-avatar>
-              <div class="ml-[8px]">{{ local.username }}</div>
+              <div class="ml-[8px]">
+                <div>{{ local.username }}</div>
+                <div class="text-sm text-gray-600">V{{ appVersion }}</div>
+              </div>
             </div>
 
             <v-menu>
@@ -84,9 +87,10 @@ import * as userReq from '@/network/details/user'
 import router from '@/router'
 import { DrawerMenu } from '@/types'
 import { local } from '@/utils/user'
-import { computed, defineModel, ref, watchEffect } from 'vue'
+import {computed, defineModel, onMounted, ref, watchEffect} from 'vue'
 import { useRoute } from 'vue-router'
 import { useDisplay } from 'vuetify'
+import * as app from '@/network/details/app'
 
 const baseRoutePath = computed(() => {
   const path = route.matched[route.matched.length - 1]?.path
@@ -101,6 +105,7 @@ const baseRoutePath = computed(() => {
 const showDrawer = defineModel<boolean>()
 const { mobile } = useDisplay()
 const showAppLogoTitle = ref<boolean>(mobile.value)
+const appVersion = ref<string>('')
 const route = useRoute()
 
 const gotoPage = (menu: DrawerMenu) => {
@@ -144,4 +149,11 @@ const logout = () => {
     router.push('/login')
   })
 }
+
+onMounted(() => {
+  app.getVersion().then(version => {
+    appVersion.value = version.version
+  })
+})
+
 </script>

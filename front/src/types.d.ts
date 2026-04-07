@@ -207,3 +207,7 @@ export interface TableSortOptions {
   key: string,
   order: 'asc' | 'desc'
 }
+
+export interface AppVersion {
+  version: string
+}
