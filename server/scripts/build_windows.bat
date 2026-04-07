@@ -1,8 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "filePath=..\web\web.go"
-for /f "tokens=2 delims==" %%a in ('findstr /c:"const version = " "%filePath%"') do (
+set "filePath=..\utils\constants.go"
+for /f "tokens=2 delims==" %%a in ('findstr /c:"const Version = " "%filePath%"') do (
     set "ver=%%a"
 )
 :: 去掉双引号

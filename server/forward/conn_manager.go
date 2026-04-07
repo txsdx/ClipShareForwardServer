@@ -57,6 +57,7 @@ func checkKey(conn net.Conn, msgInfo connListenerInfo) bool {
 			"type":      check,
 			"result":    "success",
 			"unlimited": "true",
+			"version":   utils.Version,
 		})
 		err := sendPacket(conn, sendData)
 		if err != nil {
@@ -71,6 +72,7 @@ func checkKey(conn net.Conn, msgInfo connListenerInfo) bool {
 		mapData := map[string]string{
 			"type":   check,
 			"result": "success",
+			"version":   utils.Version,
 		}
 		forwardCfg := types.AppConfig.Forward
 		if forwardCfg.FileTransferLimit.Enabled {
@@ -152,6 +154,7 @@ func checkKey(conn net.Conn, msgInfo connListenerInfo) bool {
 		"remaining":   remaining,
 		"rate":        rate,
 		"remark":      remark,
+		"version":     utils.Version,
 	})
 	err := sendPacket(conn, sendData)
 	if err != nil {
@@ -582,5 +585,24 @@ func onBaseConnReceived(selfId string, data []byte) {
 		socketMapsMu.Lock()
 		delete(SendFileConnMap, targetId)
 		socketMapsMu.Unlock()
+	case version:
+        socketMapsMu.RLock()
+        skt := BaseSocketsMap[selfId]
+        socketMapsMu.RUnlock()
+
+        if skt == nil {
+            logs.Warn("version request but socket not found: ", selfId)
+            return
+        }
+
+        sendData, _ := json.Marshal(map[string]string{
+            "type":    version,
+            "version": utils.Version,
+        })
+
+        err := sendPacket(skt.Conn, sendData)
+        if err != nil {
+            logs.Error("send version failed:", err, "self:", selfId)
+        }
 	}
 }

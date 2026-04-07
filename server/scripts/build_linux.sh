@@ -1,5 +1,5 @@
-filePath="../web/web.go"
-version=$(awk -F'"' '/const version/ {print $2}' "$filePath")
+filePath="../utils/constants.go"
+version=$(awk -F'"' '/const Version/ {print $2}' "$filePath")
 echo "Version is: $version"
 
 export GOOS=linux

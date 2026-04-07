@@ -18,7 +18,6 @@ import (
 )
 
 const authKey = "Authorization"
-const version = "1.1.3"
 
 //go:embed all:dist/*
 var embeddedFiles embed.FS
@@ -76,7 +75,7 @@ func login(c *gin.Context) {
 }
 
 func getVersion(c *gin.Context) {
-	successResult(c, gin.H{"version": version})
+	successResult(c, gin.H{"version": utils.Version})
 }
 func logout(c *gin.Context) {
 	lastOperationTime = nil

@@ -52,6 +52,7 @@ const (
 	fileReceiverConnected = "fileReceiverConnected"
 	Base                  = "base"
 	check                 = "check"
+	version               = "version"
 	DataSync              = "dataSync"
 	FileSync              = "fileSync"
 	FileSyncNotAllowed    = "fileSyncNotAllowed"
