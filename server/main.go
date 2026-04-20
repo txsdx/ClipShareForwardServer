@@ -6,10 +6,11 @@ import (
 	"clipshare/types"
 	"clipshare/utils"
 	"clipshare/web"
-	"github.com/fsnotify/fsnotify"
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/fsnotify/fsnotify"
 )
 
 var logs *utils.LogManager

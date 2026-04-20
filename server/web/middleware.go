@@ -4,9 +4,10 @@ import (
 	"clipshare/types"
 	"clipshare/utils"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // GlobalExceptionMiddleware handle all error on request

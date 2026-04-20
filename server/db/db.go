@@ -1,10 +1,11 @@
 package db
 
 import (
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 	"os"
 	"path/filepath"
+
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 var AppDb *gorm.DB

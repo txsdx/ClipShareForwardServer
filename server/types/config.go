@@ -2,12 +2,13 @@ package types
 
 import (
 	"clipshare/utils"
+	"os"
+	"time"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
 	_ "gopkg.in/yaml.v3"
-	"os"
-	"time"
 )
 
 var AppConfig Config

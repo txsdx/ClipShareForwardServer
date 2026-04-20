@@ -47,6 +47,7 @@ const (
 	requestConnect        = "requestConnect"
 	sendFile              = "sendFile"
 	ping                  = "ping"
+	pingResult            = "pingResult"
 	cancelSendFile        = "cancelSendFile"
 	recFile               = "recFile"
 	fileReceiverConnected = "fileReceiverConnected"

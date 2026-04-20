@@ -70,9 +70,9 @@ func checkKey(conn net.Conn, msgInfo connListenerInfo) bool {
 	key := msgInfo.msg["key"]
 	if types.AppConfig.PublicMode {
 		mapData := map[string]string{
-			"type":   check,
-			"result": "success",
-			"version":   utils.Version,
+			"type":    check,
+			"result":  "success",
+			"version": utils.Version,
 		}
 		forwardCfg := types.AppConfig.Forward
 		if forwardCfg.FileTransferLimit.Enabled {
@@ -249,7 +249,7 @@ func onBaseTypeConnected(conn net.Conn, msgInfo connListenerInfo, packetReader *
 		delete(BaseSocketsMap, selfId)
 		tcpConn, ok := conn.(*net.TCPConn)
 		if ok {
-		    tcpConn.SetLinger(0) // 立即发送 RST
+			tcpConn.SetLinger(0) // 立即发送 RST
 		}
 		err = conn.Close()
 		logs.Error("close result: ", err, ". self: ", selfId, ". tcpConn ok: ", ok)
@@ -586,23 +586,42 @@ func onBaseConnReceived(selfId string, data []byte) {
 		delete(SendFileConnMap, targetId)
 		socketMapsMu.Unlock()
 	case version:
-        socketMapsMu.RLock()
-        skt := BaseSocketsMap[selfId]
-        socketMapsMu.RUnlock()
+		socketMapsMu.RLock()
+		skt := BaseSocketsMap[selfId]
+		socketMapsMu.RUnlock()
 
-        if skt == nil {
-            logs.Warn("version request but socket not found: ", selfId)
-            return
-        }
+		if skt == nil {
+			logs.Warn("version request but socket not found: ", selfId)
+			return
+		}
 
-        sendData, _ := json.Marshal(map[string]string{
-            "type":    version,
-            "version": utils.Version,
-        })
+		sendData, _ := json.Marshal(map[string]string{
+			"type":    version,
+			"version": utils.Version,
+		})
 
-        err := sendPacket(skt.Conn, sendData)
-        if err != nil {
-            logs.Error("send version failed:", err, "self:", selfId)
-        }
+		err := sendPacket(skt.Conn, sendData)
+		if err != nil {
+			logs.Error("send version failed:", err, "self:", selfId)
+		}
+	case ping:
+		socketMapsMu.RLock()
+		skt := BaseSocketsMap[selfId]
+		socketMapsMu.RUnlock()
+
+		if skt == nil {
+			logs.Warn("ping request but socket not found: ", selfId)
+			return
+		}
+
+		sendData, _ := json.Marshal(map[string]string{
+			"type": pingResult,
+		})
+
+		err := sendPacket(skt.Conn, sendData)
+		if err != nil {
+			logs.Error("send ping failed:", err, "self:", selfId)
+		}
+
 	}
 }

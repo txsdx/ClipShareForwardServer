@@ -4,3 +4,4 @@ build
 web/dist
 !web/dist/
 !web/dist/index.html
+data

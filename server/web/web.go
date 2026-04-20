@@ -8,13 +8,14 @@ import (
 	"crypto/md5"
 	"embed"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"io/fs"
 	"math/rand"
 	"net/http"
 	"sort"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 const authKey = "Authorization"

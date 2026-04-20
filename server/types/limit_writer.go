@@ -2,8 +2,9 @@ package types
 
 import (
 	"context"
-	"golang.org/x/time/rate"
 	"io"
+
+	"golang.org/x/time/rate"
 )
 
 type RateLimitWriter struct {
