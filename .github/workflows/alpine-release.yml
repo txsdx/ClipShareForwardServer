@@ -72,7 +72,7 @@ jobs:
               npm --prefix ./front install;
               npm --prefix ./front run build;
               GOOS=linux GOARCH=${ARCH} CGO_ENABLED=1 \
-              CC=musl-gcc CFLAGS="-static" \
+              CC=musl-gcc CFLAGS="-static" LDFLAGS="-static" \
               go build -C ./server \
               -ldflags="-s -w -linkmode external -extldflags -static" \
               -o ../build/alpine/forward_server_linux_${ARCH}_${VERSION} ./
@@ -143,3 +143,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/clipshare-forward-server:${{ needs.prepare.outputs.tag }}
           build-args: |
             VERSION=${{ needs.prepare.outputs.version }}
+            TARGETOS=linux
