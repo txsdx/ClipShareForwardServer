@@ -68,11 +68,12 @@ jobs:
             -v "${PWD}:/src" \
             -w /src \
             alpine:3.20 sh -c '
+              set -e
               apk add --no-cache go build-base musl-dev nodejs npm;
               npm --prefix ./front install;
               npm --prefix ./front run build;
               GOOS=linux GOARCH=${ARCH} CGO_ENABLED=1 \
-              CC=musl-gcc CFLAGS="-static" LDFLAGS="-static" \
+              CC=musl-gcc CFLAGS="-static" \
               go build -C ./server \
               -ldflags="-s -w -linkmode external -extldflags -static" \
               -o ../build/alpine/forward_server_linux_${ARCH}_${VERSION} ./
