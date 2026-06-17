@@ -1,0 +1,14 @@
+FROM alpine:3.20
+
+WORKDIR /app
+
+ARG TARGETARCH
+ARG TARGETOS
+ARG VERSION
+COPY forward_server_${TARGETOS}_${TARGETARCH}_${VERSION} forward_server
+
+RUN apk add --no-cache tzdata && chmod +x ./forward_server
+
+EXPOSE 80 9283
+
+CMD ["./forward_server"]
