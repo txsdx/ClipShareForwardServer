@@ -75,7 +75,7 @@ jobs:
               CC=musl-gcc CFLAGS="-static" \
               go build -C ./server \
               -ldflags="-s -w -linkmode external -extldflags -static" \
-              -o ./build/alpine/forward_server_linux_${ARCH}_${VERSION} ./
+              -o ../build/alpine/forward_server_linux_${ARCH}_${VERSION} ./
             '
 
       - name: Upload Alpine binary artifact
